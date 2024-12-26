@@ -28,4 +28,14 @@ public class ClientsRepository implements IClientsRepository {
 
         return response;
     };
+
+    @Override
+    public Map<String, Object> registerClient(ClientEntity clientEntity){
+        var data = mongo.insert(clientEntity);
+        Map<String, Object> response = new HashMap<>();
+        response.put("client", data);
+        response.put("status", "success");
+        return response;
+
+    }
 }
