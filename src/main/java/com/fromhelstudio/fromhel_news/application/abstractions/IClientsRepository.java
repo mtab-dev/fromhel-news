@@ -7,4 +7,5 @@ import java.util.Map;
 public interface IClientsRepository {
     Map<String, Object> getAllClients();
     Map<String, Object> registerClient(ClientEntity client);
+    Map<String, Object> removeClient(String clientId);
 }
