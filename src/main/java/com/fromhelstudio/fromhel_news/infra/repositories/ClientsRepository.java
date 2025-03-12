@@ -1,6 +1,7 @@
 package com.fromhelstudio.fromhel_news.infra.repositories;
 
 import com.fromhelstudio.fromhel_news.application.abstractions.IClientsRepository;
+import com.fromhelstudio.fromhel_news.application.mailer.MailerService;
 import com.fromhelstudio.fromhel_news.domain.entities.ClientEntity;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -15,10 +16,13 @@ import java.util.Map;
 public class ClientsRepository implements IClientsRepository {
 
     private final MongoTemplate mongo;
+    private final MailerService mailer;
 
-    public ClientsRepository(MongoTemplate mongo) {
+    public ClientsRepository(MongoTemplate mongo, MailerService mailer) {
         this.mongo = mongo;
+        this.mailer = mailer;
     }
+
 
     @Override
     public Map<String, Object> getAllClients(){
@@ -42,6 +46,10 @@ public class ClientsRepository implements IClientsRepository {
 
         response.put("client", data);
         response.put("status", "success");
+
+        System.out.println("ta aq");
+        mailer.newUserMail(clientEntity.getEmail(), "New User", "Testando FDP");
+        System.out.println("passou");
 
         return response;
     }
