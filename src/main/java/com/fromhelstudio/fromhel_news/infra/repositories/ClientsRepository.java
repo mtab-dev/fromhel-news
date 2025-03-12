@@ -48,7 +48,7 @@ public class ClientsRepository implements IClientsRepository {
         response.put("status", "success");
 
         System.out.println("ta aq");
-        mailer.newUserMail(clientEntity.getEmail(), "New User", "Testando FDP");
+        mailer.newUserMail(clientEntity.getEmail(), "New User", "Testing");
         System.out.println("passou");
 
         return response;
